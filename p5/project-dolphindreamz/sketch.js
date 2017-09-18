@@ -14,7 +14,7 @@ function dolphinDrop() {
   this.image = img3
   this.x = mouseX - 60
   this.y = mouseY
-  this.speed = 3
+  this.speed = 4
   this.framesHasBeenInEye = 0
 
   this.drawAndUpdate = function() {
@@ -22,17 +22,6 @@ function dolphinDrop() {
     this.y = this.y + this.speed
   }
 }
-
-// function dolphinTear() {
-//   this.image = img3
-//   this.x = 370
-//   this.y = 420
-//
-//   this.cry = function() {
-//     image(this.image, this.x, this.y);
-//     this.y = this.y + 5
-//   }
-// }
 
 function setup() {
   bg = loadImage("imgs/pastel-hearts-bg.gif");
@@ -48,33 +37,36 @@ function draw() {
   dolphins.forEach( function( dolphin ) {
     dolphin.drawAndUpdate();
 
-    if ( (((dolphin.x>=370) && (dolphin.x<=550)) || ((dolphin.x>=830) && (dolphin.x<=1015))) && ((dolphin.y>=415) && (dolphin.y<=420)) ) {
+    if ( (((dolphin.x>=320) && (dolphin.x<=510)) || ((dolphin.x>=790) && (dolphin.x<=990))) && ((dolphin.y>=405) && (dolphin.y<=410)) ) {
       dolphin.framesHasBeenInEye = dolphin.framesHasBeenInEye + 1;
 
       if ( dolphin.framesHasBeenInEye == 1 ) {
-        birthDolphin( dolphin.x, dolphin.y + 10 );
-        birthDolphin( dolphin.x + 10, dolphin.y + 10 );
-        birthDolphin( dolphin.x + 20, dolphin.y + 10 );
+        dolphinCry( dolphin.x, dolphin.y + 10 );
         dolphin.y = 5000
-        console.log ("birthDolphin")
+        // console.log ("birthDolphin")
       }
     }
   })
 }
 
-function birthDolphin( startX, startY ) {
+function birthDolphin( startX, startY, speed ) {
   var dol = new dolphinDrop()
   dol.x = startX
   dol.y = startY
-  dol.speed = (Math.random() * 5) + 1
+  dol.speed = speed || 4
+  // dol.speed = (Math.random() * 5) + 1
   dolphins.push( dol );
 }
 
+function dolphinCry( startX, startY ) {
+  birthDolphin( startX, startY, (Math.random() * 2 ) + 2 );
+  setTimeout( function(){
+    dolphinCry( startX, startY )
+  }, 500);
+}
+
 function mouseClicked() {
-  // birthDolphin( 500, 100 );
   birthDolphin( mouseX-60, mouseY );
-  // console.log( "mouse clicked at", mouseX, mouseY )
   // d.x = d.x + 70 * Math.random()
   // d.y = d.y - 70 * Math.random()
-
 }
