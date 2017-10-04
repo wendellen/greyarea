@@ -1,23 +1,13 @@
 function setup() {
-  createCanvas(480, 120)
+  createCanvas(480, 1000)
 }
 
 function draw() {
-  background(204);
-
-  point(240, 60)
-  point(240, 59)
-  point(240, 58)
-  point(240, 57)
-
-  point(40, 60)
-  point(40, 59)
-  point(40, 58)
-  point(40, 57)
-
-  point(440, 60)
-  point(440, 59)
-  point(440, 58)
-  point(440, 57)
+  background (204);
+  line (20, 50, 420, 110);
+  triangle (200, 120, 20, 200, 420, 200);
+  quad (40, 230, 400, 250, 420, 270, 20, 300);
+  rect (20, 330, 400, 100);
+  ellipse (220, 500, 400, 100)
 
 }
